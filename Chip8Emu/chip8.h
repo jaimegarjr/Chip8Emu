@@ -1,9 +1,25 @@
+// *********************************************************
+//
+//				  CHIP 8 CLASS DECLARATION
+//
+// *********************************************************
+
+// Libraries
+#include <iostream>
+#include <fstream>
 #include <cstdint>
+
+using namespace std;
 
 // Chip8 class
 class Chip8 {
 	public:
-		// some functions here later
+
+		// Chip8 constructor
+		Chip8();
+
+		// Chip8 function to load in a given ROM from a filename
+		void LoadROM(char const* filename);
 
 	private:
 		// Chip-8 emulator specfications as listed here: https://austinmorlan.com/posts/chip8_emulator/
