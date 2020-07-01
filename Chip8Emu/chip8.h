@@ -8,6 +8,8 @@
 #include <iostream>
 #include <fstream>
 #include <cstdint>
+#include <random>
+#include <chrono>
 
 using namespace std;
 
@@ -20,6 +22,10 @@ class Chip8 {
 
 		// Chip8 function to load in a given ROM from a filename
 		void LoadROM(char const* filename);
+
+		// random number generator components
+		default_random_engine randGen;
+		uniform_int_distribution<uint8_t> randByte;
 
 	private:
 		// Chip-8 emulator specfications as listed here: https://austinmorlan.com/posts/chip8_emulator/

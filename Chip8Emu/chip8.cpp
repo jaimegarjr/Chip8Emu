@@ -6,6 +6,8 @@
 
 // header inclusion
 #include "chip8.h"
+#include <random>
+#include <chrono>
 
 using namespace std;
 
@@ -47,7 +49,9 @@ uint8_t fontset[FONT_SIZE] = {
 };
 
 // Chip8 constructor declaration
-Chip8::Chip8() {
+Chip8::Chip8()
+	: randGen(std::chrono::system_clock::now().time_since_epoch().count())
+{
 	// Sets the program counter to the starting address in memory
 	program_counter = START_ADDRESS;
 
@@ -55,6 +59,9 @@ Chip8::Chip8() {
 	for (unsigned int i = 0; i < FONT_SIZE; i++) {
 		memory[FONT_START_ADDRESS + i] = fontset[i];
 	}
+
+	// initializes the random number generator
+	randByte = std::uniform_int_distribution<uint8_t>(0, 255U);
 }
 
 // Rom loading function declaration
