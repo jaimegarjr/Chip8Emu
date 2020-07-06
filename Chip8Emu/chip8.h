@@ -23,11 +23,22 @@ class Chip8 {
 		// Chip8 function to load in a given ROM from a filename
 		void LoadROM(char const* filename);
 
-		// random number generator components
-		default_random_engine randGen;
-		uniform_int_distribution<uint8_t> randByte;
-
 	private:
+
+		// random number generator components
+		std::default_random_engine randGen;
+		std::uniform_int_distribution<uint16_t> randByte; // FIX ME: changed from uint8_t to uint16_t due to error, why?
+
+		// INSTRUCTION SET FUNCTIONS
+		// Clears the screen
+		void OP_00E0();
+
+		// Returns from a subroutine
+		void OP_00EE();
+
+		// Jumps to a particular location
+		void OP_1nnn();
+
 		// Chip-8 emulator specfications as listed here: https://austinmorlan.com/posts/chip8_emulator/
 		uint8_t memory[4096]{};			// creates memory array composed of 8-bit elements
 		uint8_t registers[16]{};		// creates 16 8-bit registers for the emulator

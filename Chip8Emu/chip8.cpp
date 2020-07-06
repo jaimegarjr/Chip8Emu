@@ -61,7 +61,7 @@ Chip8::Chip8()
 	}
 
 	// initializes the random number generator
-	randByte = std::uniform_int_distribution<uint8_t>(0, 255U);
+	randByte = std::uniform_int_distribution<uint16_t>(0, 255U);
 }
 
 // Rom loading function declaration
@@ -95,4 +95,30 @@ void Chip8::LoadROM(char const* filename) {
 		// delets dynamically allocated buffer array
 		delete[] buffer;
 	}
+}
+
+// Function to clear the screen when ROM calls it
+void Chip8::OP_00E0() {
+	// clears the screen with memset
+	memset(display, 0, sizeof(display));
+}
+
+// Function to return from a subroutine
+void Chip8::OP_00EE()
+{
+	// decremements the stack pointer
+	--stack_pointer;
+
+	// assigns the program_counter from the stack
+	program_counter = stack[stack_pointer];
+}
+
+// Function that jumps to a particular location
+void Chip8::OP_1nnn() {
+
+	// creates address with location
+	uint16_t address = opcode & 0x0FFFu;
+
+	// makes the program counter point to address
+	program_counter = address;
 }
