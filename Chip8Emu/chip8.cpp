@@ -122,3 +122,45 @@ void Chip8::OP_1nnn() {
 	// makes the program counter point to address
 	program_counter = address;
 }
+
+void Chip8::OP_2nnn()
+{
+	// creates address with location
+	uint16_t address = opcode & 0x0FFFu;
+
+	// access the index of stack usiing the pointer then assign to program counter
+	stack[sp] = pc;
+
+	//increment stack pointer
+	++sp;
+
+	//make the program counter point to address
+	pc = address;
+}
+
+void Chip8::OP_3xkk()
+{
+
+	//declare 2 variables for different registers
+	uint8_t Vx = (opcode & 0x0F00u) >> 8u;
+	uint8_t byte = opcode & 0x00FFu;
+
+	//if the previous 2 variables have the same component add 2
+	if (registers[Vx] == byte)
+	{
+		pc += 2;
+	}
+}
+
+void Chip8::OP_4xkk()
+{
+	//declare 2 variables for different registers
+	uint8_t Vx = (opcode & 0x0F00u) >> 8u;
+	uint8_t byte = opcode & 0x00FFu;
+
+	//if the previous 2 variables dont have the same component add 2
+	if (registers[Vx] != byte)
+	{
+		pc += 2;
+	}
+}
