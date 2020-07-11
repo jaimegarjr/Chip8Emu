@@ -123,44 +123,47 @@ void Chip8::OP_1nnn() {
 	program_counter = address;
 }
 
+// Calls a subroutine
 void Chip8::OP_2nnn()
 {
 	// creates address with location
 	uint16_t address = opcode & 0x0FFFu;
 
 	// access the index of stack usiing the pointer then assign to program counter
-	stack[sp] = pc;
+	stack[stack_pointer] = program_counter;
 
-	//increment stack pointer
-	++sp;
+	// increment stack pointer
+	++stack_pointer;
 
-	//make the program counter point to address
-	pc = address;
+	// make the program counter point to address
+	program_counter = address;
 }
 
+// Skip instruction if Vx == kk
 void Chip8::OP_3xkk()
 {
 
-	//declare 2 variables for different registers
+	// declare 2 variables for different registers
 	uint8_t Vx = (opcode & 0x0F00u) >> 8u;
 	uint8_t byte = opcode & 0x00FFu;
 
-	//if the previous 2 variables have the same component add 2
+	// if the previous 2 variables have the same component add 2
 	if (registers[Vx] == byte)
 	{
-		pc += 2;
+		program_counter += 2;
 	}
 }
 
+// Skip next instruction if Vx != kk
 void Chip8::OP_4xkk()
 {
-	//declare 2 variables for different registers
+	// declare 2 variables for different registers
 	uint8_t Vx = (opcode & 0x0F00u) >> 8u;
 	uint8_t byte = opcode & 0x00FFu;
 
-	//if the previous 2 variables dont have the same component add 2
+	// if the previous 2 variables dont have the same component add 2
 	if (registers[Vx] != byte)
 	{
-		pc += 2;
+		program_counter += 2;
 	}
 }

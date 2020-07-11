@@ -9,4 +9,11 @@ The project is mainly being developed in the **Visual Studio IDE**.
 
 A general outline that we followed during the development process could be seen below!
 
-...coming soon...
+# General Outline
+1. Interpreter Requirements
+2. Importing ROM Files
+3. Definition of the Fontset
+4. Random Number Generator
+5. Definition of Instruction Set
+
+To be continued.

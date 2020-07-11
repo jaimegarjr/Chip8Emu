@@ -39,6 +39,15 @@ class Chip8 {
 		// Jumps to a particular location
 		void OP_1nnn();
 
+		// Calls a subroutine
+		void OP_2nnn();
+
+		// Skip instruction if Vx == kk
+		void OP_3xkk();
+
+		// Skip next instruction if Vx != kk
+		void OP_4xkk();
+
 		// Chip-8 emulator specfications as listed here: https://austinmorlan.com/posts/chip8_emulator/
 		uint8_t memory[4096]{};			// creates memory array composed of 8-bit elements
 		uint8_t registers[16]{};		// creates 16 8-bit registers for the emulator
