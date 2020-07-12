@@ -123,7 +123,7 @@ void Chip8::OP_1nnn() {
 	program_counter = address;
 }
 
-// Calls a subroutine
+// Function that calls a subroutine
 void Chip8::OP_2nnn()
 {
 	// creates address with location
@@ -139,7 +139,7 @@ void Chip8::OP_2nnn()
 	program_counter = address;
 }
 
-// Skip instruction if Vx == kk
+// Function to skip instruction if Vx == kk
 void Chip8::OP_3xkk()
 {
 
@@ -154,7 +154,7 @@ void Chip8::OP_3xkk()
 	}
 }
 
-// Skip next instruction if Vx != kk
+// Function to skip next instruction if Vx != kk
 void Chip8::OP_4xkk()
 {
 	// declare 2 variables for different registers
@@ -166,4 +166,41 @@ void Chip8::OP_4xkk()
 	{
 		program_counter += 2;
 	}
+}
+
+// Function to skip next instruction if Vx != Vy
+void Chip8::OP_5xy0() {
+
+	// declare variables Vx and Vy
+	uint8_t Vx = (opcode & 0x0F00u) >> 8u;
+	uint8_t Vy = (opcode & 0x00F0u) >> 4u;
+
+	// check if they are equal, if so then add two to program_counter
+	if (registers[Vx] == registers[Vy])
+	{
+		program_counter += 2;
+	}
+}
+
+// Function to set Vx equal to kk, or byte
+void Chip8::OP_6xkk() {
+	
+	// declares 8 bit variables
+	uint8_t Vx = (opcode & 0x0F00u) >> 8u;
+	uint8_t byte = opcode & 0x00FFu;
+
+	// sets Vx register to byte
+	registers[Vx] = byte;
+
+}
+
+// Function to set Vx = Vx + kk
+void Chip8::OP_7xkk() {
+
+	// declares 8 bit variables
+	uint8_t Vx = (opcode & 0x0F00u) >> 8u;
+	uint8_t byte = opcode & 0x00FFu;
+
+	// increments Vx register by byte
+	registers[Vx] += byte;
 }

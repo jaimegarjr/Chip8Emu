@@ -48,6 +48,15 @@ class Chip8 {
 		// Skip next instruction if Vx != kk
 		void OP_4xkk();
 
+		// Skip next instruction if Vx != Vy
+		void OP_5xy0();
+
+		// Set Vx = kk
+		void OP_6xkk();
+
+		// Set Vx = Vx + kk
+		void OP_7xkk();
+
 		// Chip-8 emulator specfications as listed here: https://austinmorlan.com/posts/chip8_emulator/
 		uint8_t memory[4096]{};			// creates memory array composed of 8-bit elements
 		uint8_t registers[16]{};		// creates 16 8-bit registers for the emulator
