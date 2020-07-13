@@ -57,6 +57,18 @@ class Chip8 {
 		// Set Vx = Vx + kk
 		void OP_7xkk();
 
+		// Sets the value of Vy to Vx
+		void OP_8xy0();
+
+		// Performs logical OR and stores in Vx
+		void OP_8xy1();
+
+		// Performs logical AND and stores it in Vx
+		void OP_8xy2();
+
+		// Performs logical XOR and stores it in Vx
+		void OP_8xy3();
+
 		// Chip-8 emulator specfications as listed here: https://austinmorlan.com/posts/chip8_emulator/
 		uint8_t memory[4096]{};			// creates memory array composed of 8-bit elements
 		uint8_t registers[16]{};		// creates 16 8-bit registers for the emulator

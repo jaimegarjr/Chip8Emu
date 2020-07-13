@@ -204,3 +204,47 @@ void Chip8::OP_7xkk() {
 	// increments Vx register by byte
 	registers[Vx] += byte;
 }
+
+// Function to set Vx = Vy
+void Chip8::OP_8xy0() {
+
+	// creates Vx and Vy variables
+	uint8_t Vx = (opcode & 0x0F00u) >> 8u;
+	uint8_t Vy = (opcode & 0x00F0u) >> 4u;
+
+	// sets Vx to Vy
+	registers[Vx] = registers[Vy];
+}
+
+// Function to logical OR Vx and Vy, and then store into Vx
+void Chip8::OP_8xy1() {
+
+	// creates Vx and Vy variables
+	uint8_t Vx = (opcode & 0x0F00u) >> 8u;
+	uint8_t Vy = (opcode & 0x00F0u) >> 4u;
+
+	// logical OR and assigns it to Vx
+	registers[Vx] |= registers[Vy];
+}
+
+// Function to logical AND Vx and Vy, and then store into Vx
+void Chip8::OP_8xy2() {
+
+	// creates Vx and Vy variables
+	uint8_t Vx = (opcode & 0x0F00u) >> 8u;
+	uint8_t Vy = (opcode & 0x00F0u) >> 4u;
+
+	// logical AND and assigns it to Vx
+	registers[Vx] &= registers[Vy];
+}
+
+// Function to logical XOR Vx and Vy, and then store into Vx
+void Chip8::OP_8xy3() {
+
+	// creates Vx and Vy variables
+	uint8_t Vx = (opcode & 0x0F00u) >> 8u;
+	uint8_t Vy = (opcode & 0x00F0u) >> 4u;
+
+	// logical OR and assigns it to Vx
+	registers[Vx] ^= registers[Vy];
+}
