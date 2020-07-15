@@ -248,3 +248,62 @@ void Chip8::OP_8xy3() {
 	// logical OR and assigns it to Vx
 	registers[Vx] ^= registers[Vy];
 }
+
+// Function to set Vx = Vx + Vy, set VF = carry.
+void Chip8::OP_8xy4() {
+	// creates Vx and Vy variables
+	uint8_t Vx = (opcode & 0x0F00u) >> 8u;
+	uint8_t Vy = (opcode & 0x00F0u) >> 4u;
+
+	// sums Vx and Vy
+	uint16_t sum = registers[Vx] + registers[Vy];
+
+	// if sum is greater than 8 bits, set flag
+	if (sum > 255U) {
+		registers[0xF] = 1;
+	}
+
+	// else, don't set flag
+	else {
+		registers[0xF] = 0;
+	}
+
+	// keeps lower 8 bits of sum and stores it in Vx
+	registers[Vx] = sum & 0xFFu;
+}
+
+// Function to set Vx = Vx - Vy, set VF = NOT borrow
+void Chip8::OP_8xy5() {
+
+	// creates Vx and Vy variables
+	uint8_t Vx = (opcode & 0x0F00u) >> 8u;
+	uint8_t Vy = (opcode & 0x00F0u) >> 4u;
+
+	// if Vx is bigger, set VF
+	if (registers[Vx] > registers[Vy])
+	{
+		registers[0xF] = 1;
+	}
+
+	// else, don't set VF
+	else
+	{
+		registers[0xF] = 0;
+	}
+
+	// subtract the two registers and store in Vx
+	registers[Vx] -= registers[Vy];
+}
+
+// Function to set Vx = Vx SHR 1
+void Chip8::OP_8xy6() {
+
+	// creates Vx variable
+	uint8_t Vx = (opcode & 0x0F00u) >> 8u;
+
+	// Save LSB in VF
+	registers[0xF] = (registers[Vx] & 0x1u);
+
+	// shifts bits one to right and reassigns
+	registers[Vx] >>= 1;
+}

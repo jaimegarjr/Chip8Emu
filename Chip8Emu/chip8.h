@@ -69,6 +69,15 @@ class Chip8 {
 		// Performs logical XOR and stores it in Vx
 		void OP_8xy3();
 
+		// Sets Vx = Vx + Vy, set VF = carry
+		void OP_8xy4();
+
+		// Sets Vx = Vx - Vy, set VF = NOT borrow
+		void OP_8xy5();
+
+		// Sets Vx = Vx SHR 1 (bits shifted right)
+		void OP_8xy6();
+
 		// Chip-8 emulator specfications as listed here: https://austinmorlan.com/posts/chip8_emulator/
 		uint8_t memory[4096]{};			// creates memory array composed of 8-bit elements
 		uint8_t registers[16]{};		// creates 16 8-bit registers for the emulator
