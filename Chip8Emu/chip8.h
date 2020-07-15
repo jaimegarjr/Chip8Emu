@@ -78,6 +78,25 @@ class Chip8 {
 		// Sets Vx = Vx SHR 1 (bits shifted right)
 		void OP_8xy6();
 
+		//Function  to Set Vx = Vy - Vx, set VF = NOT borrow.
+		void OP_8xy7();
+
+		//Set Vx = Vx SHR 1.
+		void OP_8xyE();
+
+		//Skip next instruction if Vx != Vy.
+		void OP_9xy0();
+
+		//Set I = nnn
+		void OP_Annn();
+
+		//Jump to location nnn + V0.
+		void OP_Bnnn();
+
+		//Set Vx = random byte AND kk.
+		void OP_Cxkk();
+	
+
 		// Chip-8 emulator specfications as listed here: https://austinmorlan.com/posts/chip8_emulator/
 		uint8_t memory[4096]{};			// creates memory array composed of 8-bit elements
 		uint8_t registers[16]{};		// creates 16 8-bit registers for the emulator

@@ -307,3 +307,82 @@ void Chip8::OP_8xy6() {
 	// shifts bits one to right and reassigns
 	registers[Vx] >>= 1;
 }
+
+//Function  to Set Vx = Vy - Vx, set VF = NOT borrow.
+void Chip8::OP_8xy7()
+{ 
+	//Creates Vx and Vy variable
+	uint8_t Vx = (opcode & 0x0F00u) >> 8u;
+	uint8_t Vy = (opcode & 0x00F0u) >> 4u;
+
+	//If Vy is bigger set VF 
+	if (registers[Vy] > registers[Vx])
+	{
+		registers[0xF] = 1;
+	}
+	// else dont set VF
+	else
+	{
+		registers[0xF] = 0;
+	}
+	//Subtract Vy register with Vx and assign to Vx register
+	registers[Vx] = registers[Vy] - registers[Vx];
+}
+
+//Set Vx = Vx SHR 1.
+void Chip8::OP_8xyE()
+{
+	//create Vx variable
+	uint8_t Vx = (opcode & 0x0F00u) >> 8u;
+
+	// Save MSB in VF
+	registers[0xF] = (registers[Vx] & 0x80u) >> 7u;
+	
+	//move register to Vx
+	registers[Vx] <<= 1;
+}
+
+//Skip next instruction if Vx != Vy.
+void Chip8::OP_9xy0()
+{
+	//declare variables Vx and Vy
+	uint8_t Vx = (opcode & 0x0F00u) >> 8u;
+	uint8_t Vy = (opcode & 0x00F0u) >> 4u;
+
+	//if Vx does not equal Vy increment pc by 2
+	if (registers[Vx] != registers[Vy])
+	{
+		pc += 2;
+	}
+}
+
+//Set I = nnn
+void Chip8::OP_Annn()
+{
+	//declare variable address
+	uint16_t address = opcode & 0x0FFFu;
+	
+	//index equals to the address declared
+	index = address;
+}
+
+//Jump to location nnn + V0.
+void Chip8::OP_Bnnn()
+{
+	//declare variable address
+	uint16_t address = opcode & 0x0FFFu;
+
+	//pc equals the register at index 0 plus address declared
+	pc = registers[0] + address;
+}
+
+//Set Vx = random byte AND kk.
+void Chip8::OP_Cxkk()
+{
+	//declare variables Vx and Vy
+	uint8_t Vx = (opcode & 0x0F00u) >> 8u;
+	uint8_t byte = opcode & 0x00FFu;
+
+	// generate a random byte and assign it to the register
+	registers[Vx] = randByte(randGen) & byte;
+}
