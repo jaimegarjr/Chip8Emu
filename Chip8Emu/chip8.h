@@ -78,22 +78,22 @@ class Chip8 {
 		// Sets Vx = Vx SHR 1 (bits shifted right)
 		void OP_8xy6();
 
-		//Function  to Set Vx = Vy - Vx, set VF = NOT borrow.
+		// Function to set Vx = Vy - Vx, set VF = NOT borrow.
 		void OP_8xy7();
 
-		//Set Vx = Vx SHR 1.
+		// Set Vx = Vx SHR 1.
 		void OP_8xyE();
 
-		//Skip next instruction if Vx != Vy.
+		// Skip next instruction if Vx != Vy.
 		void OP_9xy0();
 
-		//Set I = nnn
+		// Set I = nnn
 		void OP_Annn();
 
-		//Jump to location nnn + V0.
+		// Jump to location nnn + V0.
 		void OP_Bnnn();
 
-		//Set Vx = random byte AND kk.
+		// Set Vx = random byte AND kk.
 		void OP_Cxkk();
 	
 
