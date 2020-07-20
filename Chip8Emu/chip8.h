@@ -88,28 +88,51 @@ class Chip8 {
 		// Sets Vx = Vx SHR 1 (bits shifted right)
 		void OP_8xy6();
 
-		// Function to set Vx = Vy - Vx, set VF = NOT borrow.
+		// Function to set Vx = Vy - Vx, set VF = NOT borrow
 		void OP_8xy7();
 
-		// Set Vx = Vx SHR 1.
+		// Set Vx = Vx SHR 1
 		void OP_8xyE();
 
-		// Skip next instruction if Vx != Vy.
+		// Skip next instruction if Vx != Vy
 		void OP_9xy0();
 
 		// Set I = nnn
 		void OP_Annn();
 
-		// Jump to location nnn + V0.
+		// Jump to location nnn + V0
 		void OP_Bnnn();
 
-		// Set Vx = random byte AND kk.
+		// Set Vx = random byte AND kk
 		void OP_Cxkk();
 
 		// Display n-byte sprite starting at memory location I at (Vx, Vy), set VF = collision
 		void OP_Dxyn();
-	
 
+		// Skip next instruction if key with the value of Vx is pressed
+		void OP_Ex9E();
+
+		// Skip next instruction if key with the value of Vx is not pressed
+		void OP_ExA1();
+
+		// Set Vx = delay timer value
+		void OP_Fx07();
+
+		// Wait for a key press, store the value of the key in Vx
+		void OP_Fx0A();
+
+		// Set delay timer = Vx
+		void OP_Fx15();
+
+		//  Set sound timer = Vx
+		void OP_Fx18();
+
+		// Set I = I + Vx
+		void OP_Fx1E();
+
+		// Set I = location of sprite for digit Vx
+		void OP_Fx29();
+	
 		// Chip-8 emulator specfications as listed here: https://austinmorlan.com/posts/chip8_emulator/
 		uint8_t memory[MEMORY_SIZE]{};			// creates memory array composed of 8-bit elements
 		uint8_t registers[REGISTER_COUNT]{};	// creates 16 8-bit registers for the emulator

@@ -421,3 +421,144 @@ void Chip8::OP_Dxyn() {
 		}
 	}
 }
+
+// Function to skip next instruction if key with the value of Vx is pressed.
+void Chip8::OP_Ex9E() {
+
+	// declare Vx
+	uint8_t Vx = (opcode & 0x0F00u) >> 8u;
+
+	// declare key and set it to register Vx
+	uint8_t key = registers[Vx];
+
+	// if keys at key is True
+	if (keys[key])
+	{
+		program_counter += 2; // skips instruction
+	}
+}
+
+// Function to skip next instruction if key with the value of Vx is not pressed
+void Chip8::OP_ExA1() {
+	// declare Vx
+	uint8_t Vx = (opcode & 0x0F00u) >> 8u;
+
+	// declare key and set it to register Vx
+	uint8_t key = registers[Vx];
+
+	// if keys at key is True
+	if (!keys[key])
+	{
+		program_counter += 2; // skips instruction
+	}
+}
+
+// Function to set register Vx to delayTimer
+void Chip8::OP_Fx07() {
+	// declare Vx
+	uint8_t Vx = (opcode & 0x0F00u) >> 8u;
+
+	// assigns the delay time to register Vx
+	registers[Vx] = delayTimer;
+}
+
+// Function to wait for a key press, and store the value of the key in Vx
+void Chip8::OP_Fx0A() {
+
+	// declare Vx
+	uint8_t Vx = (opcode & 0x0F00u) >> 8u;
+
+	// if statements for respective key (maybe implement a loop?)
+	if (keys[0]) {
+		registers[Vx] = 0;
+	}
+	else if (keys[1]) {
+		registers[Vx] = 1;
+	}
+	else if (keys[2]) {
+		registers[Vx] = 2;
+	}
+	else if (keys[3]) {
+		registers[Vx] = 3;
+	}
+	else if (keys[4]) {
+		registers[Vx] = 4;
+	}
+	else if (keys[5]) {
+		registers[Vx] = 5;
+	}
+	else if (keys[6]) {
+		registers[Vx] = 6;
+	}
+	else if (keys[7]) {
+		registers[Vx] = 7;
+	}
+	else if (keys[8]) {
+		registers[Vx] = 8;
+	}
+	else if (keys[9]) {
+		registers[Vx] = 9;
+	}
+	else if (keys[10]) {
+		registers[Vx] = 10;
+	}
+	else if (keys[11]) {
+		registers[Vx] = 11;
+	}
+	else if (keys[12]) {
+		registers[Vx] = 12;
+	}
+	else if (keys[13]) {
+		registers[Vx] = 13;
+	}
+	else if (keys[14]) {
+		registers[Vx] = 14;
+	}
+	else if (keys[15]) {
+		registers[Vx] = 15;
+	}
+	else {
+		program_counter -= 2; // else, "wait" until key is pressed
+	}
+}
+
+// Function to set delay timer = Vx
+void Chip8::OP_Fx15() {
+
+	// declare Vx
+	uint8_t Vx = (opcode & 0x0F00u) >> 8u;
+
+	// sets delayTimer to registers[Vx]
+	delayTimer = registers[Vx];
+}
+
+// Function to set sound timer = Vx
+void Chip8::OP_Fx18() {
+
+	// declare Vx
+	uint8_t Vx = (opcode & 0x0F00u) >> 8u;
+
+	// sets soundTimer to registers[Vx]
+	soundTimer = registers[Vx];
+}
+
+// Function to set I = I + Vx.
+void Chip8::OP_Fx1E() {
+
+	// declare Vx
+	uint8_t Vx = (opcode & 0x0F00u) >> 8u;
+
+	// adds registers[Vx] to index
+	index += registers[Vx];
+}
+
+// Function to set I = location of sprite for digit Vx
+void Chip8::OP_Fx29() {
+
+	// declare Vx and digit
+	uint8_t Vx = (opcode & 0x0F00u) >> 8u;
+	uint8_t digit = registers[Vx];
+
+	// gets location of sprite by multiplying digit by 5
+	index = FONT_START_ADDRESS + (5 * digit);
+}
