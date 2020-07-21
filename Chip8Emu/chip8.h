@@ -133,6 +133,15 @@ class Chip8 {
 		// Set I = location of sprite for digit Vx
 		void OP_Fx29();
 	
+		//Store BCD representation of Vx in memory locations I, I+1, and I+2.
+		void OP_Fx33();
+
+		//Store registers V0 through Vx in memory starting at location I.
+		void OP_Fx55();
+
+		//Read registers V0 through Vx from memory starting at location I.
+		void OP_Fx65();
+
 		// Chip-8 emulator specfications as listed here: https://austinmorlan.com/posts/chip8_emulator/
 		uint8_t memory[MEMORY_SIZE]{};			// creates memory array composed of 8-bit elements
 		uint8_t registers[REGISTER_COUNT]{};	// creates 16 8-bit registers for the emulator
