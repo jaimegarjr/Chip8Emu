@@ -39,7 +39,17 @@ class Chip8 {
 		std::default_random_engine randGen;
 		std::uniform_int_distribution<uint16_t> randByte; // FIX ME: changed from uint8_t to uint16_t due to error, why?
 
+		// Function Table Declarations
+		void Table0();
+		void Table8();
+		void TableE();
+		void TableF();
+
 		// INSTRUCTION SET FUNCTIONS
+
+		// Do nothing
+		void OP_NULL();
+
 		// Clears the screen
 		void OP_00E0();
 
@@ -133,13 +143,13 @@ class Chip8 {
 		// Set I = location of sprite for digit Vx
 		void OP_Fx29();
 	
-		//Store BCD representation of Vx in memory locations I, I+1, and I+2.
+		// Store BCD representation of Vx in memory locations I, I+1, and I+2
 		void OP_Fx33();
 
-		//Store registers V0 through Vx in memory starting at location I.
+		// Store registers V0 through Vx in memory starting at location I
 		void OP_Fx55();
 
-		//Read registers V0 through Vx from memory starting at location I.
+		// Read registers V0 through Vx from memory starting at location I
 		void OP_Fx65();
 
 		// Chip-8 emulator specfications as listed here: https://austinmorlan.com/posts/chip8_emulator/
@@ -153,5 +163,11 @@ class Chip8 {
 		uint16_t stack[STACK_LEVELS]{};	// creates 16-bit memory stack array
 		uint16_t opcode;				// 16-bit opcode instruction
 		
-
+		// Function Pointer Tables and Ranges
+		typedef void (Chip8::* Chip8Func)();
+		Chip8Func table[0xF + 1]{ &Chip8::OP_NULL };
+		Chip8Func table0[0xE + 1]{ &Chip8::OP_NULL };
+		Chip8Func table8[0xE + 1]{ &Chip8::OP_NULL };
+		Chip8Func tableE[0xE + 1]{ &Chip8::OP_NULL };
+		Chip8Func tableF[0x65 + 1]{ &Chip8::OP_NULL };
 };
