@@ -21,9 +21,15 @@
     <ClCompile Include="chip8.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="platform.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="chip8.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="platform.h">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>

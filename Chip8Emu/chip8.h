@@ -30,6 +30,9 @@ class Chip8 {
 		// Chip8 function to load in a given ROM from a filename
 		void LoadROM(char const* filename);
 
+		// Fetch, Decode, Execute
+		void Cycle();
+
 		uint32_t display[VIDEO_WIDTH * VIDEO_HEIGHT]{};	// 32-bit display for output
 		uint8_t keys[KEY_COUNT];						// 8-bit array for key inputs
 
@@ -151,9 +154,6 @@ class Chip8 {
 
 		// Read registers V0 through Vx from memory starting at location I
 		void OP_Fx65();
-
-		//Fetch, Decode, Execute
-		void Cycle();
 
 		// Chip-8 emulator specfications as listed here: https://austinmorlan.com/posts/chip8_emulator/
 		uint8_t memory[MEMORY_SIZE]{};			// creates memory array composed of 8-bit elements

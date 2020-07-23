@@ -681,10 +681,10 @@ void Chip8::OP_Fx65()
 void Chip8::Cycle()
 {
 	// Fetch
-	opcode = (memory[pc] << 8u) | memory[pc + 1];
+	opcode = (memory[program_counter] << 8u) | memory[program_counter + 1];
 
 	// Increment the PC before we execute anything
-	pc += 2;
+	program_counter += 2;
 
 	// Decode and Execute
 	((*this).*(table[(opcode & 0xF000u) >> 12u]))();
