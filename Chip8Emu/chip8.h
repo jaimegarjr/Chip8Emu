@@ -152,6 +152,9 @@ class Chip8 {
 		// Read registers V0 through Vx from memory starting at location I
 		void OP_Fx65();
 
+		//Fetch, Decode, Execute
+		void Cycle();
+
 		// Chip-8 emulator specfications as listed here: https://austinmorlan.com/posts/chip8_emulator/
 		uint8_t memory[MEMORY_SIZE]{};			// creates memory array composed of 8-bit elements
 		uint8_t registers[REGISTER_COUNT]{};	// creates 16 8-bit registers for the emulator
